@@ -1,13 +1,15 @@
 {
-    "name": "laravel/laravel",
+    "name": "macocci7/photo-gps-api",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "A simple API which returns GPS data of photos from their EXIF data.",
+    "keywords": ["photo", "gps", "api"],
     "license": "MIT",
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.9",
-        "laravel/tinker": "^2.9"
+        "laravel/sanctum": "^4.0",
+        "laravel/tinker": "^2.9",
+        "macocci7/php-photo-gps": "^1.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
