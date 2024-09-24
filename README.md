@@ -65,6 +65,11 @@ Supported Exif Versions:
   ```bash
   php artisan migrate
   ```
+- Set appropriate write access permissions for each folder and each file.
+  - `bootstrap/cache/`
+  - `database/`
+  - `database/database.sqlite`
+  - `storage/*`
 
 ## 5. Limitations
 
@@ -105,6 +110,9 @@ Supported Exif Versions:
 |upload|`POST`|`/api/upload`|uploading files api|
 
 ### 6-1. `form` endpoint
+
+- method: `POST`
+- endpoint: `/api/files`
 
 The `form` endpoint provides a form page for submitting data to the API.
 
@@ -198,6 +206,9 @@ Acceptable params:
 </details>
 
 ### 6-3. `upload` endpoint
+
+- method: `POST`
+- endpoint: `/api/upload`
 
 The `upload` endpoint returns gps data of the uploaded photos.
 
