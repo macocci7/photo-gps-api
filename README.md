@@ -1,6 +1,6 @@
 # Photo GPS API
 
-An simple API which returns GPS data of photos from their EXIF data.
+A simple API which returns GPS data of photos from their EXIF data.
 
 ## 1. Features
 
