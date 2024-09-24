@@ -61,6 +61,10 @@ Supported Exif Versions:
   ```bash
   php artisan key:generate
   ```
+- Run migrations
+  ```bash
+  php artisan migrate
+  ```
 
 ## 5. Limitations
 
