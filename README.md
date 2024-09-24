@@ -269,7 +269,7 @@ GPS data items and contents differ slightly depending on the EXIF ​​version.
 
 Basically, each version is backward compatible.
 
-However, as an exception, the `GPS_Attribute_Ref` item in `Exif Version 3.0` is not backward compatible.
+However, as an exception, the `GPSAltitudeRef` item in `Exif Version 3.0` is not backward compatible.
 
 See more details:
 
