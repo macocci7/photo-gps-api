@@ -10,7 +10,7 @@
 |GPSLongitude|RATIONAL|3|---|None|---|
 |GPSAltitudeRef|BYTE|1|* 0: Sea level|0||
 |GPSAltitude|RATIONAL|1|---|None|---|
-|GPStimeStamp|RATIONAL|3|---|None|---|
+|GPSTimeStamp|RATIONAL|3|---|None|---|
 |GPSSatellites|ASCII|0|---|None|---|
 |GPSStatus|ASCII|2|* A: Measurement in progress<br />* V: Measurement Interoperability|None|---|
 |GPSMeasureMode|ASCII|2|* 2: 2-dimensional measurement<br />* 3: 3-dimensional measurement|None|---|

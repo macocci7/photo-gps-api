@@ -2,6 +2,8 @@
 
 namespace App\MyLib;
 
+use App\Models\PgaAccessLog;
+use App\Models\PgaProcessLog;
 use Illuminate\Http\Request;
 use Macocci7\PhpPhotoGps\Helpers\Exif;
 use Macocci7\PhpPhotoGps\Helpers\Uri;
@@ -86,5 +88,47 @@ class PhotoGpsLib
             }
         }
         return $names;
+    }
+
+    /**
+     * logs access
+     *
+     * @param   Request $request
+     * @param   array<string, bool|string>
+     * @return  void
+     */
+    public static function logAccess(Request $request, array $data)
+    {
+        $accessLog = PgaAccessLog::create([
+            'endpoint' => '/' . $request->path(),
+            'is_error' => (int) ($data['is_error'] ?? 0),
+            'error_message' => $data['error_message'] ?? null,
+            'ip' => $request->ip(),
+            'user_agent' => $request->header('User-Agent') ?? null,
+            'referer' => $request->headers->get('referer') ?? null,
+        ]);
+        if (!$data['is_error']) {
+            self::logProcess($accessLog, $data['gps'] ?? []);
+        }
+    }
+
+    /**
+     * logs process
+     *
+     * @param   PgaAccessLog    $accessLog
+     * @param   array<string, string|array<string, int|string|string[]>>
+     * @return  void
+     */
+    public static function logProcess(PgaAccessLog $accessLog, array $gps)
+    {
+        foreach ($gps as $process) {
+            $accessLog->processLogs()->create([
+                'filename' => $process['file'] ?? '',
+                'exif_version' => $process['exif_version'] ?? '',
+                'gps_data' => isset($process['gps_data'])
+                    ? json_encode($process['gps_data']) 
+                    : null,
+            ]);
+        }
     }
 }

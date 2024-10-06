@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\MyLib\PhotoGpsLib;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 
@@ -44,6 +45,7 @@ class BaseController extends Controller
             $response['data'] = $data;
         }
 
+        PhotoGpsLib::logAccess($request, $data);
         return response()->json($response);
     }
 }
