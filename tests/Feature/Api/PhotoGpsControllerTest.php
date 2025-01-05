@@ -15,7 +15,7 @@ class PhotoGpsControllerTest extends TestCase
         $files = [
             'file1' => 'http://macocci7.net/photo/gps/remote_fake_gps_001.jpg',
             'file2' => 'https://macocci7.net/photo/gps/remote_fake_gps_002.jpg',
-            'file3' => 'https://raw.githubusercontent.com/macocci7/PHP-PhotoGps/main/example/img/without_gps.jpg',
+            'file3' => 'https://raw.githubusercontent.com/macocci7/PHP-PhotoGps/main/examples/img/without_gps.jpg',
             'file4' => 'ftp://macocci7.net/photo/gps/remote_fake_gps_003.jpg',
         ];
         $this->post(route('api.files'), $files)
