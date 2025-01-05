@@ -5,45 +5,46 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages;
 
 use App\Models\PgaAccessLog;
-use MoonShine\Components\TableBuilder;
-use MoonShine\Fields\Text;
-use MoonShine\TypeCasts\ModelCast;
-use MoonShine\Pages\Page;
-use MoonShine\Components\MoonShineComponent;
+use MoonShine\Laravel\Pages\Page;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Laravel\TypeCasts\ModelCaster;
+use MoonShine\UI\Components\Table\TableBuilder;
+use MoonShine\UI\Fields\Text;
 
 class SummaryIps extends Page
 {
-    protected ?string $alias = 'summary-ips';
-
     /**
      * @return array<string, string>
      */
-    public function breadcrumbs(): array
+    public function getBreadcrumbs(): array
     {
         return [
-            '#' => $this->title()
+            '#' => $this->getTitle()
         ];
     }
 
-    public function title(): string
+    public function getTitle(): string
     {
         return $this->title ?: 'Summary:IPs';
     }
 
     /**
-     * @return list<MoonShineComponent>
+     * @return list<ComponentContract>
      */
-    public function components(): array
+    protected function components(): iterable
 	{
 		return [
-            TableBuilder::make(
-                items: PgaAccessLog::selectRaw('ip, count(ip) as count')
-                    ->groupBy('ip')
-                    ->orderBy('count', 'desc')
-                    ->paginate(5)
+            TableBuilder::make()
+            ->items(
+                new ModelCaster(PgaAccessLog::class)
+                    ->paginatorCast(
+                        PgaAccessLog::selectRaw('ip, count(ip) as count')
+                            ->groupBy('ip')
+                            ->orderBy('count', 'desc')
+                            ->paginate(5)
+                    )
             )
-                ->fields([Text::make('IP'), Text::make('Count')])
-                ->cast(ModelCast::make(PgaAccessLog::class))
+            ->fields([Text::make('IP'), Text::make('Count')])
         ];
 	}
 }

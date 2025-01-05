@@ -10,7 +10,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10",
         "macocci7/php-photo-gps": "^1.8",
-        "moonshine/moonshine": "^2.23"
+        "moonshine/moonshine": "^3.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24",
