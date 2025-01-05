@@ -36,7 +36,7 @@ class SummaryEndpoints extends Page
 		return [
             TableBuilder::make()
                 ->items(
-                    new ModelCaster(PgaAccessLog::class)
+                    (new ModelCaster(PgaAccessLog::class))
                         ->paginatorCast(
                             PgaAccessLog::selectRaw('endpoint, is_error, count(*) as count')
                                 ->groupBy('endpoint', 'is_error')

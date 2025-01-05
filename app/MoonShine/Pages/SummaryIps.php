@@ -36,7 +36,7 @@ class SummaryIps extends Page
 		return [
             TableBuilder::make()
             ->items(
-                new ModelCaster(PgaAccessLog::class)
+                (new ModelCaster(PgaAccessLog::class))
                     ->paginatorCast(
                         PgaAccessLog::selectRaw('ip, count(ip) as count')
                             ->groupBy('ip')

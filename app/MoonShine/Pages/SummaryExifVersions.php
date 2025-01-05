@@ -36,7 +36,7 @@ class SummaryExifVersions extends Page
 		return [
             TableBuilder::make()
                 ->items(
-                    new ModelCaster(PgaAccessLog::class)
+                    (new ModelCaster(PgaAccessLog::class))
                         ->paginatorCast(
                             PgaProcessLog::selectRaw('exif_version, count(*) as count')
                                 ->groupBy('exif_version')
