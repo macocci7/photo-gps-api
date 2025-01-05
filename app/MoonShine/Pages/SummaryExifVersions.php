@@ -5,45 +5,46 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages;
 
 use App\Models\PgaProcessLog;
-use MoonShine\Components\TableBuilder;
-use MoonShine\Fields\Text;
-use MoonShine\TypeCasts\ModelCast;
-use MoonShine\Pages\Page;
-use MoonShine\Components\MoonShineComponent;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Laravel\Pages\Page;
+use MoonShine\Laravel\TypeCasts\ModelCaster;
+use MoonShine\UI\Components\Table\TableBuilder;
+use MoonShine\UI\Fields\Text;
 
 class SummaryExifVersions extends Page
 {
-    protected ?string $alias = 'summary-exif-versions';
-
     /**
      * @return array<string, string>
      */
-    public function breadcrumbs(): array
+    public function getBreadcrumbs(): array
     {
         return [
-            '#' => $this->title()
+            '#' => $this->getTitle()
         ];
     }
 
-    public function title(): string
+    public function getTitle(): string
     {
         return $this->title ?: 'Summary:Exif Versions';
     }
 
     /**
-     * @return list<MoonShineComponent>
+     * @return list<ComponentContract>
      */
-    public function components(): array
+    protected function components(): iterable
 	{
 		return [
-            TableBuilder::make(
-                items: PgaProcessLog::selectRaw('exif_version, count(*) as count')
-                    ->groupBy('exif_version')
-                    ->orderBy('count', 'desc')
-                    ->paginate(5)
-            )
+            TableBuilder::make()
+                ->items(
+                    new ModelCaster(PgaAccessLog::class)
+                        ->paginatorCast(
+                            PgaProcessLog::selectRaw('exif_version, count(*) as count')
+                                ->groupBy('exif_version')
+                                ->orderBy('count', 'desc')
+                                ->paginate(5)
+                        )
+                )
                 ->fields([Text::make('Exif_Version'), Text::make('Count')])
-                ->cast(ModelCast::make(PgaProcessLog::class))
         ];
 	}
 }

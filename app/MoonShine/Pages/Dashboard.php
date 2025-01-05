@@ -4,31 +4,40 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages;
 
-use MoonShine\Pages\Page;
-use MoonShine\Components\MoonShineComponent;
+use Illuminate\Support\Facades\Process;
+use MoonShine\Laravel\Pages\Page;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\UI\Components\FlexibleRender;
+use MoonShine\UI\Components\Layout\Box;
 
 class Dashboard extends Page
 {
     /**
      * @return array<string, string>
      */
-    public function breadcrumbs(): array
+    public function getBreadcrumbs(): array
     {
         return [
-            '#' => $this->title()
+            '#' => $this->getTitle()
         ];
     }
 
-    public function title(): string
+    public function getTitle(): string
     {
         return $this->title ?: 'Dashboard';
     }
 
     /**
-     * @return list<MoonShineComponent>
+     * @return list<ComponentContract>
      */
-    public function components(): array
+    protected function components(): iterable
 	{
-		return [];
+		return [
+            Box::make('Disk Usage', [
+                FlexibleRender::make(
+                    '<pre>' . Process::run('df -h')->output() . '</pre>'
+                ),
+            ]),
+        ];
 	}
 }

@@ -5,47 +5,48 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages;
 
 use App\Models\PgaAccessLog;
-use MoonShine\Components\TableBuilder;
-use MoonShine\Fields\Text;
-use MoonShine\TypeCasts\ModelCast;
-use MoonShine\Pages\Page;
-use MoonShine\Components\MoonShineComponent;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Laravel\Pages\Page;
+use MoonShine\Laravel\TypeCasts\ModelCaster;
+use MoonShine\UI\Components\Table\TableBuilder;
+use MoonShine\UI\Fields\Text;
 
 class SummaryEndpoints extends Page
 {
-    protected ?string $alias = 'summary-endpoints';
-
     /**
      * @return array<string, string>
      */
-    public function breadcrumbs(): array
+    public function getBreadcrumbs(): array
     {
         return [
-            '#' => $this->title()
+            '#' => $this->getTitle()
         ];
     }
 
-    public function title(): string
+    public function getTitle(): string
     {
         return $this->title ?: 'Summary:Endpoints';
     }
 
     /**
-     * @return list<MoonShineComponent>
+     * @return list<ComponentContract>
      */
-    public function components(): array
+    protected function components(): iterable
 	{
 		return [
-            TableBuilder::make(
-                items: PgaAccessLog::selectRaw('endpoint, is_error, count(*) as count')
-                    ->groupBy('endpoint', 'is_error')
-                    ->orderBy('count', 'desc')
-                    ->orderBy('endpoint', 'asc')
-                    ->orderBy('is_error', 'asc')
-                    ->paginate(5)
-            )
-                ->fields([Text::make('Endpoint'), Text::make('Is_Error'), Text::make('Count')])
-                ->cast(ModelCast::make(PgaAccessLog::class))
+            TableBuilder::make()
+                ->items(
+                    new ModelCaster(PgaAccessLog::class)
+                        ->paginatorCast(
+                            PgaAccessLog::selectRaw('endpoint, is_error, count(*) as count')
+                                ->groupBy('endpoint', 'is_error')
+                                ->orderBy('count', 'desc')
+                                ->orderBy('endpoint', 'asc')
+                                ->orderBy('is_error', 'asc')
+                                ->paginate(5)
+                        )
+                )
+                ->fields([Text::make('Endpoint'), Text::make('Is_Error'), Text::make('Count')]),
         ];
 	}
 }

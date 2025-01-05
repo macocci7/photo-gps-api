@@ -1,0 +1,46 @@
+name: Test and Static Analysis (Pull Request)
+
+on: pull_request
+
+jobs:
+  test-and-static-analysis:
+    name: Test and Lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.2', '8.3', '8.4']
+
+    steps:
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: xdebug
+          tools: composer:v2
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: PHP Version Check
+        run: php -v
+
+      - name: Validate Composer JSON
+        run: composer validate
+
+      - name: Run Composer Install
+        id: composerinstall
+        run: composer install --no-interaction
+
+      - name: Tests
+        run: |
+          php artisan --version
+          ./vendor/bin/phpunit --version
+          echo "Test All via artisan"
+          php artisan test

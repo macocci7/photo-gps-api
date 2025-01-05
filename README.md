@@ -70,7 +70,10 @@ Supported Exif Versions:
   - `database/`
   - `database/database.sqlite`
   - `storage/*`
-
+- Create super users for admin panel
+   ```bash
+   php artisan moonshine:user
+   ```
 ## 5. Limitations
 
 - **Rate Limit**: 6 access per minute, per user IP.
