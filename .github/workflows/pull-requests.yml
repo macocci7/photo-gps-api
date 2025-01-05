@@ -41,6 +41,9 @@ jobs:
       - name: Tests
         run: |
           php artisan --version
+          php artisan key:generate
+          touch database/database.sqlite
+          php artisan migrate
           ./vendor/bin/phpunit --version
           echo "Test All via artisan"
           php artisan test
