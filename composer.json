@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^11.44",
+        "laravel/framework": "^12.3",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10",
         "macocci7/php-photo-gps": "^1.8",
