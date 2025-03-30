@@ -136,74 +136,85 @@ Acceptable params:
 
 ```json
 [
-   {
-      "file":"http:\/\/macocci7.net\/photo\/gps\/remote_fake_gps_001.jpg",
-      "exif_version":"0300",
-      "gps_data":{
-         "GPSLatitudeRef":"N",
-         "GPSLatitude":[
-            "31\/1",
-            "34\/1",
-            "8083\/1000"
-         ],
-         "GPSLongitudeRef":"E",
-         "GPSLongitude":[
-            "35\/1",
-            "30\/1",
-            "5245\/1000"
-         ],
-         "GPSAltitudeRef":"3",
-         "GPSAltitude":"42200\/100",
-         "GPSTimeStamp":[
-            "2\/1",
-            "22\/1",
-            "14\/1"
-         ],
-         "GPSSpeedRef":"N",
-         "GPSSpeed":"22778\/1829",
-         "GPSTrackRef":"M",
-         "GPSTrack":"157243\/2500",
-         "GPSImgDirectionRef":"M",
-         "GPSImgDirection":"195581\/555",
-         "GPSDestBearingRef":"M",
-         "GPSDestBearing":"83632\/603",
-         "GPSDateStamp":"2018:03:31"
-      }
-   },
-   {
-      "file":"https:\/\/macocci7.net\/photo\/gps\/remote_fake_gps_002.jpg",
-      "exif_version":"0300",
-      "gps_data":{
-         "GPSLatitudeRef":"S",
-         "GPSLatitude":[
-            "20\/1",
-            "11\/1",
-            "20898\/1000"
-         ],
-         "GPSLongitudeRef":"W",
-         "GPSLongitude":[
-            "67\/1",
-            "35\/1",
-            "15808\/1000"
-         ],
-         "GPSAltitudeRef":"0",
-         "GPSAltitude":"370000\/100",
-         "GPSTimeStamp":[
-            "1\/1",
-            "31\/1",
-            "46\/1"
-         ],
-         "GPSSpeedRef":"M",
-         "GPSSpeed":"100\/1",
-         "GPSTrackRef":"T",
-         "GPSTrack":"143885\/536",
-         "GPSImgDirectionRef":"T",
-         "GPSImgDirection":"115074\/413",
-         "GPSDestBearingRef":"T",
-         "GPSDestBearing":"188418\/689",
-         "GPSDateStamp":"2015:06:07"
-      }
-   }
+	{
+		"file": "http://macocci7.net/photo/gps/remote_fake_gps_001.jpg",
+		"exif_version": "0300",
+		"gps_data": {
+			"GPSLatitudeRef": "N",
+			"GPSLatitude": [
+				"31/1",
+				"34/1",
+				"8083/1000"
+			],
+			"GPSLongitudeRef": "E",
+			"GPSLongitude": [
+				"35/1",
+				"30/1",
+				"5245/1000"
+			],
+			"GPSAltitudeRef": "3",
+			"GPSAltitude": "42200/100",
+			"GPSTimeStamp": [
+				"2/1",
+				"22/1",
+				"14/1"
+			],
+			"GPSSpeedRef": "N",
+			"GPSSpeed": "22778/1829",
+			"GPSTrackRef": "M",
+			"GPSTrack": "157243/2500",
+			"GPSImgDirectionRef": "M",
+			"GPSImgDirection": "195581/555",
+			"GPSDestBearingRef": "M",
+			"GPSDestBearing": "83632/603",
+			"GPSDateStamp": "2018:03:31"
+		},
+		"is_error": false,
+		"error_message": ""
+	},
+	{
+		"file": "https://macocci7.net/photo/gps/remote_fake_gps_002.jpg",
+		"exif_version": "0300",
+		"gps_data": {
+			"GPSLatitudeRef": "S",
+			"GPSLatitude": [
+				"20/1",
+				"11/1",
+				"20898/1000"
+			],
+			"GPSLongitudeRef": "W",
+			"GPSLongitude": [
+				"67/1",
+				"35/1",
+				"15808/1000"
+			],
+			"GPSAltitudeRef": "0",
+			"GPSAltitude": "370000/100",
+			"GPSTimeStamp": [
+				"1/1",
+				"31/1",
+				"46/1"
+			],
+			"GPSSpeedRef": "M",
+			"GPSSpeed": "100/1",
+			"GPSTrackRef": "T",
+			"GPSTrack": "143885/536",
+			"GPSImgDirectionRef": "T",
+			"GPSImgDirection": "115074/413",
+			"GPSDestBearingRef": "T",
+			"GPSDestBearing": "188418/689",
+			"GPSDateStamp": "2015:06:07"
+		},
+		"is_error": false,
+		"error_message": ""
+	},
+	{
+		"file": "https://raw.githubusercontent.com/macocci7/PHP-PhotoGps/main/example/img/without_gps.jpg",
+		"exif_version": null,
+		"gps_data": [],
+		"is_error": true,
+		"error_message": "https://raw.githubusercontent.com/macocci7/PHP-PhotoGps/main/example/img/without_gps.jpg is not readable."
+	}
 ]
 ```
 </details>
@@ -226,53 +237,57 @@ Acceptable params:
 
 ```json
 [
-   {
-      "file":"miracle_north_intersection.jpg",
-      "exif_version":"0300",
-      "gps_data":{
-         "GPSLatitudeRef":"N",
-         "GPSLatitude":[
-            "35\/1",
-            "52\/1",
-            "20491\/1000"
-         ],
-         "GPSLongitudeRef":"E",
-         "GPSLongitude":[
-            "139\/1",
-            "47\/1",
-            "830\/1000"
-         ],
-         "GPSAltitudeRef":"0",
-         "GPSAltitude":"370\/100"
-      }
-   },
-   {
-      "file":"sendai_snowman01.JPEG",
-      "exif_version":"0300",
-      "gps_data":{
-         "GPSLatitudeRef":"N",
-         "GPSLatitude":[
-            "38\/1",
-            "15\/1",
-            "49902\/1000"
-         ],
-         "GPSLongitudeRef":"E",
-         "GPSLongitude":[
-            "140\/1",
-            "52\/1",
-            "15063\/1000"
-         ],
-         "GPSAltitudeRef":"0",
-         "GPSAltitude":"4200\/100"
-      }
-   },
-   {
-      "file":"without_gps.jpg",
-      "exif_version":"0220",
-      "gps_data":[
-         
-      ]
-   }
+	{
+		"file": "miracle_north_intersection.jpg",
+		"exif_version": "0300",
+		"gps_data": {
+			"GPSLatitudeRef": "N",
+			"GPSLatitude": [
+				"35/1",
+				"52/1",
+				"20491/1000"
+			],
+			"GPSLongitudeRef": "E",
+			"GPSLongitude": [
+				"139/1",
+				"47/1",
+				"830/1000"
+			],
+			"GPSAltitudeRef": "0",
+			"GPSAltitude": "370/100"
+		},
+		"is_error": false,
+		"error_message": ""
+	},
+	{
+		"file": "sendai_snowman01.JPEG",
+		"exif_version": "0300",
+		"gps_data": {
+			"GPSLatitudeRef": "N",
+			"GPSLatitude": [
+				"38/1",
+				"15/1",
+				"49902/1000"
+			],
+			"GPSLongitudeRef": "E",
+			"GPSLongitude": [
+				"140/1",
+				"52/1",
+				"15063/1000"
+			],
+			"GPSAltitudeRef": "0",
+			"GPSAltitude": "4200/100"
+		},
+		"is_error": false,
+		"error_message": ""
+	},
+	{
+		"file": "without_gps.jpg",
+		"exif_version": "0220",
+		"gps_data": [],
+		"is_error": false,
+		"error_message": ""
+	}
 ]
 ```
 </details>

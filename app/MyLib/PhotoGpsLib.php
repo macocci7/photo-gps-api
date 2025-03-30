@@ -41,11 +41,18 @@ class PhotoGpsLib
             if (is_null($file)) {
                 continue;
             }
-            $pg->load($file);
+            $isReadable = Uri::isUri($file)
+                ? Uri::isReadable($file)
+                : is_readable($file);
+            if ($isReadable) {
+                $pg->load($file);
+            }
             $gps[] = [
                 'file' => $file,
-                'exif_version' => Exif::version(),
-                'gps_data' => $pg->gps(),
+                'exif_version' => $isReadable ? Exif::version() : null,
+                'gps_data' => $isReadable ? $pg->gps() : [],
+                'is_error' => !$isReadable,
+                'error_message' => $isReadable ? '' : "{$file} is not readable.",
             ];
         }
         return $gps;
@@ -122,6 +129,9 @@ class PhotoGpsLib
     public static function logProcess(PgaAccessLog $accessLog, array $gps)
     {
         foreach ($gps as $process) {
+            if ($process['is_error']) {
+                continue;
+            }
             $accessLog->processLogs()->create([
                 'filename' => $process['file'] ?? '',
                 'exif_version' => $process['exif_version'] ?? '',

@@ -16,7 +16,8 @@ class PhotoGpsControllerTest extends TestCase
             'file1' => 'http://macocci7.net/photo/gps/remote_fake_gps_001.jpg',
             'file2' => 'https://macocci7.net/photo/gps/remote_fake_gps_002.jpg',
             'file3' => 'https://raw.githubusercontent.com/macocci7/PHP-PhotoGps/main/examples/img/without_gps.jpg',
-            'file4' => 'ftp://macocci7.net/photo/gps/remote_fake_gps_003.jpg',
+            'file4' => 'https://macocci7.net/no-such-file.jpg',
+            'file5' => 'ftp://macocci7.net/photo/gps/remote_fake_gps_003.jpg',
         ];
         $this->post(route('api.files'), $files)
             ->assertJson(
@@ -35,7 +36,12 @@ class PhotoGpsControllerTest extends TestCase
                         ->where('2.file', $files['file3'])
                         ->where('2.exif_version', '0220')
                         ->where('2.gps_data', [])
-                        ->missing('3')
+                        ->where('3.file', $files['file4'])
+                        ->where('3.exif_version', null)
+                        ->where('3.gps_data', [])
+                        ->where('3.is_error', true)
+                        ->where('3.error_message', 'https://macocci7.net/no-such-file.jpg is not readable.')
+                        ->missing('4')
                         ->etc()
             );
     }
